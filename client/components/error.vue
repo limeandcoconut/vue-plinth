@@ -34,7 +34,7 @@ export default {
   height: auto;
   padding-top: 1em;
   background-color: white;
-  box-shadow: @dimgred 25px 25px 1px 8px;
+  box-shadow: @teal 25px 25px 1px 8px;
   z-index: 200;
   overflow: hidden;
   line-height: 1.2;
@@ -44,7 +44,7 @@ export default {
 .error-title {
   font-size: .basis(2)[];
   padding-bottom: 0.5em;
-  .rmn();
+  .oxanium();
 }
 
 .error-message {
@@ -54,7 +54,7 @@ export default {
 
 .dismiss-button {
   display: block;
-  background-color: @dimred;
+  background-color: @teal;
   color: white;
   width: 100%;
   padding: 1em 0;

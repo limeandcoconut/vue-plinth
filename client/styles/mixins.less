@@ -1,24 +1,15 @@
-@redline: #e66465;
-@blueline: #9198e5;
-@greenline: #659865;
-@red: #D01420;
-@dimred: #610101;
-@dimgred: #300;
-@lessdimgred: #300;
+// @redline: #e66465;
+// @blueline: #9198e5;
+// @greenline: #659865;
+@teal: #00aba9;
 
-// rubik
+// oxanium
 // Standard usage:
-// .rubik(500)[];
-// Gives an element the font face rubik.
-.rubik(@weight: 400) {
+// .oxanium(500)[];
+// Gives an element the font face oxanium.
+.oxanium(@weight: 400) {
   // font-family: 'Courier New', sans-serif;
-  font-family: 'Rubik', 'Courier New', sans-serif;
-  font-weight: @weight;
-}
-
-.rmn(@weight: 400) {
-  // font-family: 'Courier New', sans-serif;
-  font-family: 'Rubik Mono One', 'Courier New', sans-serif;
+  font-family: 'Oxanium', 'Courier New', sans-serif;
   font-weight: @weight;
 }
 
@@ -221,51 +212,3 @@
   @padding: unit((@y / @x) * 100, %);
   padding-top: @padding;
 }
-
-@base-font-size: 	12px;
-@base-line-height: 	1.2;
-
-// this value may vary for each font
-// unitless value relative to 1em
-@cap-height: 		0.64;
-
-
-// .baseline(@font-size; @scale: 2) {
-
-// 	// rhythm unit
-// 	@rhythm: @base-line-height * @font-size / @scale;
-
-// 	// number of rhythm units that can fit the font-size
-// 	@lines: ceil((@font-size + 0.001px) / @rhythm);
-
-// 	// calculate the new line-height
-// 	@line-height: unit(@rhythm * @lines / @font-size);
-
-// 	// use the results
-// 	font-size: @font-size;
-// 	line-height: @line-height;
-
-// 	@baseline-distance: (@line-height - @cap-height) / 2;
-
-
-
-// 	// METHOD 1
-// 	/////////////////
-
-// 	// this method can relatively move down elements you may not want to
-// 	// position: relative;
-// 	// top: @baseline-distance + em;
-
-
-
-// 	// METHOD 2
-// 	/////////////////
-
-// 	// if you use this mixin only on elements that have one direction margins
-// 	// http://csswizardry.com/2012/06/single-direction-margin-declarations/
-// 	// you can use this method with no worries.
-// 	// this method assumes the direction is down and the margin is @base-line-height
-// 	padding-top: unit(@baseline-distance, em);
-// 	margin-bottom: unit(@base-line-height - @baseline-distance, em);
-// }
-

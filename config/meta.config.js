@@ -1,25 +1,25 @@
-const description = 'Full Stack Web Developer, Check out my Github or email me. 🍻' // eslint-diable-line max-len
-const color = '#D01420'
-const source = 'https://jacobsmith.tech/images/logo-og.png'
+const description = 'A CSR vue project off of which to base your apps. Check out my Github or email me. 🍻' // eslint-diable-line max-len
+const color = '#00aba9'
+const source = 'https://vue-plinth.jacobsmith.tech/images/logo-og.png'
 // NOTE: This file is included in client. Don't put secrets in here. They go in keys.js
 
 const siteMeta = {
-  name: 'Jacob Smith',
-  short_name: 'JS', // eslint-disable-line camelcase
-  title: 'Jacob Smith | JavaScript Fungineer',
+  name: 'Vue Plinth',
+  short_name: 'Plinth', // eslint-disable-line camelcase
+  title: 'Vue Plinth | The Basis of Your Apps',
   author: 'Jacob Smith',
   display: 'standalone',
   start_url: '/', // eslint-disable-line camelcase
   // Keep in sync with config.js
-  host: 'https://jacobsmith.tech',
+  host: 'https://vue-plinth.jacobsmith.tech',
   description,
   color,
   og: {
     description,
     image: {
       src: source,
-      width: '1200',
-      height: '628',
+      width: '279',
+      height: '279',
     },
     type: 'website',
   },
@@ -27,9 +27,9 @@ const siteMeta = {
     creator: '@limeandcoconut',
     image: {
       src: source,
-      alt: 'A play off of the JavaScript logo using my color scheme and the font Rubik. J.S. are my initials.',
+      alt: 'A modernist concrete plinth you can build your apps off of',
     },
-    card: 'summary_large_image',
+    card: 'summary',
   },
   ms: {
     color,

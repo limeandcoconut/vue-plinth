@@ -1,7 +1,8 @@
 <template>
   <div class="layout">
-    <canvas></canvas>
-    404
+    <div/>
+    <div class="banner">Homepage</div>
+    <div/>
   </div>
 </template>
 
@@ -66,7 +67,7 @@ export default {
 @import '../styles/mixins.less';
 
 .layout {
-  background-color: @red;
+  background-color: white;
   display: grid;
   grid-template: auto / 1fr 10fr 1fr;
   align-items: center;
@@ -75,8 +76,16 @@ export default {
   justify-content: center;
   height: 100vh;
   perspective: 60em;
-  font-size: .basis(2)[];
-  .rubik(500);
+  font-size: .fz(venti)[];
+  .oxanium(500);
+
+  .banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: .basis(5)[];
+    border: 2px solid @teal;
+  }
 
   .above(md; {
     grid-template: auto / 1fr .basis(80)[] 1fr;
@@ -90,7 +99,6 @@ export default {
     display: flex;
     flex-direction: column;
   }
-
 }
 
 </style>

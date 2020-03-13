@@ -46,18 +46,16 @@ if (isDevelopment) {
   })
 
   // Set up content-security-policy
-  const contentSelf = ['\'self\'', 'jacobsmith.tech', 'blob:', 'data:']
+  const contentSelf = ['\'self\'', 'vue-plinth.jacobsmith.tech', 'blob:', 'data:']
   const contentAnalytics = ['*.google-analytics.com', 'google-analytics.com']
   const contentFonts = ['*.fonts.gstatic.com', 'fonts.gstatic.com']
   app.use(csp({
     directives: {
       defaultSrc: [...contentSelf, ...contentAnalytics],
-      // Remember this will need to be updated every time the inline script tag is edited.
       scriptSrc: [
         ...contentSelf,
         ...contentAnalytics,
         (request, response) => `'nonce-${response.locals.nonce}'`,
-        '\'sha256-aqUHABLCeyqxUUMbTH5BBX/kb68k0Pjj6fW+0IPYYuM=\'',
       ],
       styleSrc: [...contentSelf, '\'unsafe-inline\''],
       fontSrc: [...contentSelf, ...contentFonts],
@@ -95,17 +93,10 @@ if (isDevelopment) {
 
 // Serve any static files in public
 // Could also replace with nginx if there's a need
+// Currentluy fonts are the only thing not otherwise accessible
 app.use('/', expressStaticGzip(path.resolve(__dirname, '../', 'public'), {
   enableBrotli: true,
-  indexFromEmptyFile: false,
-  serveStatic: {
-    setHeaders(response, path) {
-      // For best results manifest.json must be served with application/manifest+json
-      if (/\/public\/manifest\.json\W?/.test(path)) {
-        response.set('Content-Type', 'application/manifest+json; charset=UTF-8')
-      }
-    },
-  },
+  index: false,
   orderPreference: ['br'],
 }))
 
@@ -114,18 +105,26 @@ app.use('/dist/', expressStaticGzip(path.resolve(__dirname, '../', 'dist'), {
   enableBrotli: true,
   index: false,
   orderPreference: ['br'],
+  serveStatic: {
+    setHeaders(response, path) {
+      // For best results manifest.json must be served with application/manifest+json
+      if (/\/dist\/manifest\.json\W?/.test(path)) {
+        response.set('Content-Type', 'application/manifest+json; charset=UTF-8')
+      }
+    },
+  },
 }))
 
 if (isDevelopment) {
-  app.use('*', (request, res, next) => {
+  app.use('*', (request, response, next) => {
     let filename = path.join(compiler.outputPath, 'index.html')
     compiler.outputFileSystem.readFile(filename, function(error, result) {
       if (error) {
         return next(error)
       }
-      res.set('content-type', 'text/html')
-      res.send(result)
-      res.end()
+      response.set('content-type', 'text/html')
+      response.send(result)
+      response.end()
     })
   })
 } else {
@@ -134,11 +133,6 @@ if (isDevelopment) {
     root: path.resolve(__dirname, '../', 'dist'),
   }))
 }
-
-//
-// app.get('*', (request, response) => {
-
-// })
 
 app.listen(frontendPort, (error) => {
   if (error) {

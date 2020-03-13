@@ -67,14 +67,14 @@ const config = {
     ],
   },
   plugins: [
-    // new CaseSensitivePathsPlugin(),
+    new CaseSensitivePathsPlugin(),
     new VueLoaderPlugin(),
     new HTMLPlugin({
       template: 'client/index.template.html',
       // Inject false turns off automatic injection of Css and JS
       inject: true,
     }),
-    // new FriendlyErrorsWebpackPlugin(),
+    new FriendlyErrorsWebpackPlugin(),
   ],
   optimization: {},
   stats: {
