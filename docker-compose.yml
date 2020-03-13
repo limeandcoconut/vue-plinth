@@ -1,0 +1,13 @@
+version: "3.7"
+services:
+  haproxy:
+    image: haproxy
+    container_name: haproxy-proxy
+    restart: unless-stopped
+    network_mode: "host" # Do NOT use on mac! Required when running on Linux hosts.
+    ports:
+      - 443:443
+      - 80:80
+    volumes:
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+      - ./certs:/etc/ssl/

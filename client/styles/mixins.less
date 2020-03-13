@@ -1,0 +1,271 @@
+@redline: #e66465;
+@blueline: #9198e5;
+@greenline: #659865;
+@red: #D01420;
+@dimred: #610101;
+@dimgred: #300;
+@lessdimgred: #300;
+
+// rubik
+// Standard usage:
+// .rubik(500)[];
+// Gives an element the font face rubik.
+.rubik(@weight: 400) {
+  // font-family: 'Courier New', sans-serif;
+  font-family: 'Rubik', 'Courier New', sans-serif;
+  font-weight: @weight;
+}
+
+.rmn(@weight: 400) {
+  // font-family: 'Courier New', sans-serif;
+  font-family: 'Rubik Mono One', 'Courier New', sans-serif;
+  font-weight: @weight;
+}
+
+.grid-breakpoints() {
+  @xs: 0;
+  @sm: 480px;
+  @md: 768px;
+  @lg: 1200px;
+  @xl: 2200px;
+};
+
+@diff: .grid-breakpoints[@xl] - .grid-breakpoints[@sm];
+@max-base: 12;
+@min-base: 6;
+@base-diff: @max-base - @min-base;
+// WARNING: Always update the @baseline/@b variables and .basis() in conjunction.
+@b: calc( ((100vw - .grid-breakpoints[@sm]) / unit(@diff)) * @base-diff + .px(@min-base)[]);
+// @baseline: 6px;
+@baseline: @b;
+.basis(@scalar) {
+  // @return: calc(@baseline * @scalar);
+  // WARNING: Always update the @baseline/@b variables and .basis() in conjunction.
+  @return: calc( (((100vw - .grid-breakpoints[@sm]) / unit(@diff)) * @base-diff + .px(@min-base)[]) * @scalar)
+}
+
+@spacing: {
+  no:    0;
+  xxs:   1 * @baseline;
+  xs:    2 * @baseline;
+  sm:    3 * @baseline;
+  md:    4 * @baseline;
+  lg:    5 * @baseline;
+  xl:    7 * @baseline;
+  xxl:   10 * @baseline;
+  xxxl:  11 * @baseline;
+};
+
+// height: calc(@dashboard-height ~"-" (@i * (@dashlet-header-height + @dashboard-margin + @dashlet-border)));
+// which will result in e.g. height: calc(90.5% - 36px);
+
+.min-font-sizes() {
+  @card:      6;
+  @cardTitle:     12;
+  @cardSubtitle:  8;
+  @xs:        10;
+  @sm:        12.5;
+  @md:        15;
+  @venti:       22.5;
+  @tetra:       36;
+  // @giga:      52.5;
+  @giga:      60;
+};
+
+.max-font-sizes() {
+  @card:      30;
+  @cardTitle:     60;
+  @cardSubtitle:  40;
+  @xs:        20;
+  @sm:        25;
+  @md:        30;
+  @venti:       45;
+  @tetra:       72;
+  @giga:       108;
+};
+
+.overlay(@color: @redline) {
+  &::before {
+    content: ' ';
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    background: repeating-linear-gradient(transparent, transparent calc(@baseline - 1px), @color calc(@baseline - 1px), @color @baseline);
+    z-index: 1000;
+    pointer-events: none;
+    // font-size: .basis(5)[];
+    // font-size: @baseline;
+    // padding-top: @padding;
+  }
+}
+
+
+// Height
+// Standard usage:
+// height: .height(md)[];
+// This is here to ensure that you are sticking to your normalization.
+.height(@multiple) {
+  @return: @baseline * @multiple;
+}
+
+// px
+// Standard usage:
+// font-size: .px(@min-fz)[];
+// Converts the given scalar to px.
+.px(@scalar) {
+  @return: @scalar * 1px;
+}
+
+// p
+// Standard usage:
+// font-size: .p(@min-width)[];
+// Converts the given scalar to percent.
+.p(@scalar) {
+  @return: @scalar * 1%;
+}
+
+// above
+// Standard usage:
+//.above(560px; {
+//  background: red;
+// });
+// OR:
+// .above(md, {
+//  background: red;
+// });
+.above(@width; @rules) when not (isnumber(@width)) {
+  @media screen and (min-width: .grid-breakpoints[@@width]) {
+    @rules();
+  }
+}
+
+.above(@width; @rules) when (isnumber(@width)) {
+  @media screen and (min-width: @width) {
+    @rules();
+  }
+}
+
+.below(@width; @rules) when not (isnumber(@width)) {
+  @media screen and (max-width: .grid-breakpoints[@@width] - 1px) {
+    @rules();
+  }
+}
+
+.below(@width; @rules) when (isnumber(@width)) {
+  @media screen and (max-width: @width) {
+    @rules();
+  }
+}
+
+// aria :focus-visible
+// Standard usage:
+// .aria-visible();
+// Use this to visually hide something that you want to be visible to screen readers.
+// Cafrefully consider if thats something you want to do.
+.aria-visible() {
+  clip-path: inset(100%);
+  clip: rect(1px 1px 1px 1px); /* IE 6/7 */
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap; /* added line */
+  width: 1px;
+}
+
+// fz (font-size)
+// Standard usage:
+// .fz(venti);
+// Outputs styles which will gracefully scale between the minimum font-size at the minimum screen size and the maximum
+// font-size at the maximum screen size. Outside screen size limits will default to the appropriate font-size extreme.
+.fz(@key) {
+  @min-fz: .min-font-sizes[@@key];
+  @max-fz: .max-font-sizes[@@key];
+
+  font-size: .px(@min-fz)[];
+
+  .above(sm; {
+    @diff: .grid-breakpoints[@xl] - .grid-breakpoints[@sm];
+    @font-diff: @max-fz - @min-fz;
+    // @font-size: calc( ((100vw - .grid-breakpoints[@sm]) / unit(@diff)) * @font-diff + .px(@min-fz)[]);
+    font-size: calc( ((100vw - .grid-breakpoints[@sm]) / unit(@diff)) * @font-diff + .px(@min-fz)[]);
+  });
+
+  .above(xl; {
+    font-size: .px(@max-fz)[];
+  });
+}
+
+// Responsive ratio
+// Standard usage:
+// @include ratio(16; 9);
+// @include ratio(16; 9; true);
+.ratio(@x; @y; @pseudo: false) when (@pseudo = true) {
+  @padding: unit((@y / @x) * 100, %);
+  &::before {
+    content: ' ';
+    display: block;
+    position: relative;
+    width: 100%;
+    padding-top: @padding;
+  }
+}
+
+.ratio(@x; @y; @pseudo: false) when not (@pseudo = true) {
+  @padding: unit((@y / @x) * 100, %);
+  padding-top: @padding;
+}
+
+@base-font-size: 	12px;
+@base-line-height: 	1.2;
+
+// this value may vary for each font
+// unitless value relative to 1em
+@cap-height: 		0.64;
+
+
+// .baseline(@font-size; @scale: 2) {
+
+// 	// rhythm unit
+// 	@rhythm: @base-line-height * @font-size / @scale;
+
+// 	// number of rhythm units that can fit the font-size
+// 	@lines: ceil((@font-size + 0.001px) / @rhythm);
+
+// 	// calculate the new line-height
+// 	@line-height: unit(@rhythm * @lines / @font-size);
+
+// 	// use the results
+// 	font-size: @font-size;
+// 	line-height: @line-height;
+
+// 	@baseline-distance: (@line-height - @cap-height) / 2;
+
+
+
+// 	// METHOD 1
+// 	/////////////////
+
+// 	// this method can relatively move down elements you may not want to
+// 	// position: relative;
+// 	// top: @baseline-distance + em;
+
+
+
+// 	// METHOD 2
+// 	/////////////////
+
+// 	// if you use this mixin only on elements that have one direction margins
+// 	// http://csswizardry.com/2012/06/single-direction-margin-declarations/
+// 	// you can use this method with no worries.
+// 	// this method assumes the direction is down and the margin is @base-line-height
+// 	padding-top: unit(@baseline-distance, em);
+// 	margin-bottom: unit(@base-line-height - @baseline-distance, em);
+// }
+
