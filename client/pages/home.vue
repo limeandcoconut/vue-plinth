@@ -23,11 +23,6 @@ import {
 
 export default {
   name: 'home',
-  data() {
-    return {
-      flipped: false,
-    }
-  },
 
   metaInfo: {
     title,
@@ -94,11 +89,6 @@ export default {
   .above(lg; {
     grid-template: auto / 1fr .basis(70)[] 1fr;
   });
-
-  @supports not (display:grid) {
-    display: flex;
-    flex-direction: column;
-  }
 }
 
 </style>
