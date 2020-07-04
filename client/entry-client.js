@@ -3,11 +3,7 @@ import VueAnalytics from 'vue-analytics'
 import createApp from './create-app.js'
 import {gaDevId as gaDevelopmentId, gaProductionId} from '../config/config.js'
 
-const {app, store, router} = createApp()
-
-if (window.__INITIAL_STATE__) {
-  store.replaceState(window.__INITIAL_STATE__)
-}
+const {app, router} = createApp()
 
 Vue.use(VueAnalytics, {
   id: (process.env.NODE_ENV === 'development') ? gaDevelopmentId : gaProductionId,
