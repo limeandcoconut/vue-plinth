@@ -46,6 +46,7 @@ if (isDevelopment) {
   })
 
   // Set up content-security-policy
+  // Keep this url in sync with config.js and meta.config.js
   const contentSelf = ['\'self\'', 'vue-plinth.jacobsmith.tech', 'blob:', 'data:']
   const contentAnalytics = ['*.google-analytics.com', 'google-analytics.com']
   const contentFonts = ['*.fonts.gstatic.com', 'fonts.gstatic.com']

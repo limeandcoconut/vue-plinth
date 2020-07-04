@@ -10,7 +10,7 @@ const siteMeta = {
   author: 'Jacob Smith',
   display: 'standalone',
   start_url: '/', // eslint-disable-line camelcase
-  // Keep in sync with config.js
+  // Keep in sync with config.js and serve.js
   host: 'https://vue-plinth.jacobsmith.tech',
   description,
   color,
