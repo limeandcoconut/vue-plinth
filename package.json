@@ -1,6 +1,6 @@
 {
   "name": "vue-plinth",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A CSR vue project off of which to base your apps",
   "main": "client/client-entry.js",
   "scripts": {
