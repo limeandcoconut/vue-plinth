@@ -17,7 +17,7 @@ For deployment, using HAProxy via the included config is also reccomended.
 ## Things to edit for your own project
 - [ ] Customize `config/config.js`  
 - [ ] Add icons  
-- [ ] Author, colors, twitter names in `config/meta.config.js`
+- [ ] Author, colors, twitter name in `config/meta.config.js`
 - [ ] Customize the `./license`
 
 ## Notes
