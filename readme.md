@@ -18,6 +18,7 @@ For deployment, using HAProxy via the included config is also reccomended.
 - [ ] Customize `config/config.js`  
 - [ ] Add icons  
 - [ ] Author, colors, twitter names in `config/meta.config.js`
+- [ ] Customize the `./license`
 
 ## Notes
 ### rel="canonical"
@@ -42,6 +43,7 @@ Getting local copies of Google Fonts
 https://google-webfonts-helper.herokuapp.com
 
 ## Todos
+- [ ] Add blame link for IE section
 
 ### Maybe Todos
 - [ ] Add WebpackDevServerUtils.choosePort to projects
