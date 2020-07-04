@@ -20,6 +20,8 @@ For deployment, using HAProxy via the included config is also reccomended.
 - [ ] Author, colors, twitter name in `config/meta.config.js`
 - [ ] Customize the `./license`
 
+- [ ] Run `./eject.sh`
+
 ## Notes
 ### rel="canonical"
 When you update the site to have more pages *UPDATE THE REL CANONICAL.*
