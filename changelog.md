@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
   
+## [0.1.4] - 2021-03-06
+
+### Changed
+
+- Upgrade deps and `npm audit fix`
+- Upgrade poscss-loader (add postcss peer dep)
+- Update Workbox sitemap syntax
+- Use new syntax for csp nonce
+
+### Removed
+
+- NoEmitOnErrorsPlugin (depreciated)
+- helmet's feature policy
+
+### Added
+
+- postcss
+
 ## [0.1.3] - 2021-03-06
 
 ### Changed

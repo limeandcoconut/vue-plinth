@@ -3,7 +3,6 @@ const crypto = require('crypto')
 const express = require('express')
 const expressStaticGzip = require('express-static-gzip')
 const fallback = require('express-history-api-fallback')
-const featurePolicy = require('feature-policy')
 const csp = require('helmet-csp')
 const frameguard = require('frameguard')
 // const hsts = require('hsts')
@@ -26,22 +25,13 @@ if (isDevelopment) {
 
 } else {
   // Don't bother with security on dev
-  // Setup feature policy
-  const contentNone = ['\'none\'']
-  app.use(featurePolicy({
-    features: {
-      camera: [...contentNone],
-      geolocation: [...contentNone],
-      microphone: [...contentNone],
-      payment: [...contentNone],
-    },
-  }))
 
   // Generate a 128 bit pseudo random base 64 nonce
   // https://www.w3.org/TR/CSP2/#nonce_value
   app.use((request, response, next) => {
     response.locals.nonce = crypto.randomBytes(16).toString('base64')
     next()
+    response.locals.nonce = crypto.randomBytes(16).toString('base64')
   })
 
   // Set up content-security-policy
@@ -49,23 +39,27 @@ if (isDevelopment) {
   const contentSelf = ['\'self\'', 'vue-plinth.jacobsmith.tech', 'blob:', 'data:']
   const contentAnalytics = ['*.google-analytics.com', 'google-analytics.com']
   const contentFonts = ['*.fonts.gstatic.com', 'fonts.gstatic.com']
-  app.use(csp({
-    directives: {
-      defaultSrc: [...contentSelf, ...contentAnalytics],
-      scriptSrc: [
-        ...contentSelf,
-        ...contentAnalytics,
-        (request, response) => `'nonce-${response.locals.nonce}'`,
-      ],
-      styleSrc: [...contentSelf, '\'unsafe-inline\''],
-      fontSrc: [...contentSelf, ...contentFonts],
-      imgSrc: [...contentSelf, ...contentAnalytics],
-      prefetchSrc: [...contentSelf, ...contentFonts],
-      connectSrc: [...contentSelf, ...contentAnalytics, ...contentFonts],
+  app.use((request, response, next) => {
+    response.locals.nonce = crypto.randomBytes(16).toString('base64')
+
+    csp({
+      directives: {
+        defaultSrc: [...contentSelf, ...contentAnalytics],
+        scriptSrc: [
+          ...contentSelf,
+          ...contentAnalytics,
+          `'nonce-${response.locals.nonce}'`,
+        ],
+        styleSrc: [...contentSelf, '\'unsafe-inline\''],
+        fontSrc: [...contentSelf, ...contentFonts],
+        imgSrc: [...contentSelf, ...contentAnalytics],
+        prefetchSrc: [...contentSelf, ...contentFonts],
+        connectSrc: [...contentSelf, ...contentAnalytics, ...contentFonts],
       // TODO: Add a report URI if you like
       // reportUri
-    },
-  }))
+      },
+    })(request, response, next)
+  })
 
   // Prevent iframes embedding this page
   app.use(frameguard({ action: 'deny' }))
