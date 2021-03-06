@@ -1,6 +1,6 @@
 {
   "name": "vue-plinth",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "A CSR vue project off of which to base your apps",
   "main": "client/client-entry.js",
   "scripts": {
@@ -64,7 +64,7 @@
     "webpack-cli": "^3.3.12",
     "webpack-dev-middleware": "^3.7.2",
     "webpack-hot-middleware": "^2.25.0",
-    "webpack-pwa-manifest": "^4.2.0",
+    "webpack-pwa-manifest": "^4.3.0",
     "webpack-visualizer-plugin": "^0.1.11",
     "workbox-webpack-plugin": "^5.1.3",
     "x-xss-protection": "^1.3.0"
