@@ -11,7 +11,7 @@ const ieNoOpen = require('ienoopen')
 const noSniff = require('dont-sniff-mimetype')
 const xssFilter = require('x-xss-protection')
 
-const {frontendPort} = require('../config/config.js')
+const { frontendPort } = require('../config/config.js')
 
 const isDevelopment = (process.env.NODE_ENV === 'development')
 const app = express()
@@ -25,9 +25,6 @@ if (isDevelopment) {
   compiler = require('./hmr.js')(app)
 
 } else {
-  // Generate a 128 bit pseudo random base 64 nonce
-  // https://www.w3.org/TR/CSP2/#nonce_value
-
   // Don't bother with security on dev
   // Setup feature policy
   const contentNone = ['\'none\'']
@@ -40,7 +37,9 @@ if (isDevelopment) {
     },
   }))
 
-  app.use(function(request, response, next) {
+  // Generate a 128 bit pseudo random base 64 nonce
+  // https://www.w3.org/TR/CSP2/#nonce_value
+  app.use((request, response, next) => {
     response.locals.nonce = crypto.randomBytes(16).toString('base64')
     next()
   })
@@ -69,7 +68,7 @@ if (isDevelopment) {
   }))
 
   // Prevent iframes embedding this page
-  app.use(frameguard({action: 'deny'}))
+  app.use(frameguard({ action: 'deny' }))
   // Hide express
   app.disable('x-powered-by')
 
@@ -107,7 +106,7 @@ app.use('/dist/', expressStaticGzip(path.resolve(__dirname, '../', 'dist'), {
   index: false,
   orderPreference: ['br'],
   serveStatic: {
-    setHeaders(response, path) {
+    setHeaders (response, path) {
       // For best results manifest.json must be served with application/manifest+json
       if (/\/dist\/manifest\.json\W?/.test(path)) {
         response.set('Content-Type', 'application/manifest+json; charset=UTF-8')
@@ -119,7 +118,7 @@ app.use('/dist/', expressStaticGzip(path.resolve(__dirname, '../', 'dist'), {
 if (isDevelopment) {
   app.use('*', (request, response, next) => {
     let filename = path.join(compiler.outputPath, 'index.html')
-    compiler.outputFileSystem.readFile(filename, function(error, result) {
+    compiler.outputFileSystem.readFile(filename, function (error, result) {
       if (error) {
         return next(error)
       }

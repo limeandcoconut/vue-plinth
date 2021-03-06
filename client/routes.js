@@ -17,25 +17,25 @@ const home = loadPage('home')
 const fourOhFour = loadPage('fourohfour')
 
 const routes = [
-  {path: '/', component: defaultLayout, children: [
-    {path: '/', component: home, name: 'home'},
+  { path: '/', component: defaultLayout, children: [
+    { path: '/', component: home, name: 'home' },
     // This is just here for fun
-    {path: '/404', component: fourOhFour},
-  ]},
-  {path: '/', component: defaultLayout, children: [
-    {path: '*', component: fourOhFour, meta: {isFourOhFour: true}},
-  ]},
+    { path: '/404', component: fourOhFour },
+  ] },
+  { path: '/', component: defaultLayout, children: [
+    { path: '*', component: fourOhFour, meta: { isFourOhFour: true } },
+  ] },
 ]
 
 const options = {
   mode: 'history',
   routes,
-  scrollBehavior(to, from, savedPosition) {
+  scrollBehavior (to, from, savedPosition) {
     if (savedPosition) {
       return savedPosition
     }
 
-    return {x: 0, y: 0}
+    return { x: 0, y: 0 }
   },
 }
 

@@ -9,23 +9,23 @@ const state = {
 }
 
 const mutations = {
-  showError(state, message) {
+  showError (state, message) {
     state.showErrorMessage = true
     state.errorMessage = message
   },
-  hideError(state) {
+  hideError (state) {
     state.showErrorMessage = false
     state.errorMessage = ''
   },
 }
 
 const actions = {
-  showError: ({commit}, message) => {
+  showError: ({ commit }, message) => {
     commit('showError', message)
   },
-  dismissError: ({commit}) => {
+  dismissError: ({ commit }) => {
     commit('hideError')
   },
 }
 
-export default () => new Vuex.Store({state, mutations, actions})
+export default () => new Vuex.Store({ state, mutations, actions })

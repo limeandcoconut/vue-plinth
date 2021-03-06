@@ -7,7 +7,7 @@
 <script>
 export default {
   name: 'fourohfour',
-  meta() {
+  meta () {
     return {
       title: 'Error 404 - Page not found',
     }

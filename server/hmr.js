@@ -1,7 +1,7 @@
 const webpack = require('webpack')
 const webpackConfig = require('../config/webpack.config')
 
-module.exports = function(app) {
+module.exports = (app) => {
   // setup on the fly compilation + hot-reload
   webpackConfig.entry.app = ['webpack-hot-middleware/client', webpackConfig.entry.app]
   webpackConfig.output.filename = '[name].js'

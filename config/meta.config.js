@@ -120,7 +120,7 @@ const siteMeta = {
 
 // Cache cacheBust
 // C-C-C-COMBO BREAKER!
-siteMeta.favicons = siteMeta.favicons.reduce((favicons, {key, src: source}) => {
+siteMeta.favicons = siteMeta.favicons.reduce((favicons, { key, src: source }) => {
   favicons[key] = source + siteMeta.cacheBust
   return favicons
 }, {})

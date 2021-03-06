@@ -7,7 +7,8 @@
     "dev": "NODE_ENV=development node server/serve.js",
     "pack:prod": "NODE_ENV=production webpack --config config/webpack.config.js --progress --hide-modules",
     "serve:prod": "NODE_ENV=production node server/serve.js",
-    "clean": "rm dist/*"
+    "clean": "rm dist/*",
+    "lint:fix": "eslint . --max-warnings 0 --format codeframe --ext .js,.vue, --fix"
   },
   "keywords": [],
   "author": "Jacob Smith <js@jacobsmith.tech>",
@@ -70,7 +71,7 @@
   },
   "devDependencies": {
     "eslint": "^7.4.0",
-    "eslint-config-limeandcoconut": "^1.3.0",
+    "eslint-config-limeandcoconut": "^3.0.0",
     "eslint-plugin-html": "^6.0.2",
     "eslint-plugin-unicorn": "^20.1.0",
     "eslint-plugin-vue": "^6.2.2"

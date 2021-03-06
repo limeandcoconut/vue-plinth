@@ -3,12 +3,12 @@ const path = require('path')
 // Core Deps required for packing
 const webpack = require('webpack')
 const HTMLPlugin = require('html-webpack-plugin')
-const {VueLoaderPlugin} = require('vue-loader')
+const { VueLoaderPlugin } = require('vue-loader')
 const MinifyPlugin = require('babel-minify-webpack-plugin')
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
-const {GenerateSW} = require('workbox-webpack-plugin')
+const { GenerateSW } = require('workbox-webpack-plugin')
 const WebpackBuildNotifierPlugin = require('webpack-build-notifier')
 const WebpackPwaManifest = require('webpack-pwa-manifest')
 const CopyPlugin = require('copy-webpack-plugin')
@@ -20,7 +20,7 @@ const RobotstxtPlugin = require('robotstxt-webpack-plugin')
 const Visualizer = require('webpack-visualizer-plugin')
 
 const siteMeta = require('./meta.config.js')
-const {productionHost} = require('../config/config.js')
+const { productionHost } = require('../config/config.js')
 
 const isProduction = process.env.NODE_ENV === 'production'
 
@@ -109,13 +109,13 @@ if (isProduction) {
 
   // Add Compression plugins and service worker caching
   config.plugins.push(
-    new Visualizer({filename: '../stats.html'}),
+    new Visualizer({ filename: '../stats.html' }),
     new MinifyPlugin(),
     new CompressionPlugin({
       filename: '[path].br[query]',
       test: /\.js$|\.css$/,
       algorithm: 'brotliCompress',
-      compressionOptions: {level: 11},
+      compressionOptions: { level: 11 },
     }),
     // It'd be best to read the options for this and cater to specific project needs
     // https://developers.google.com/web/tools/workbox/guides/generate-service-worker/webpack
@@ -154,7 +154,7 @@ if (isProduction) {
       background_color: siteMeta.color, // eslint-disable-line camelcase
       theme_color: siteMeta.color, // eslint-disable-line camelcase
       // crossorigin: 'use-credentials', // can be null, use-credentials or anonymous
-      icons: siteMeta.manifestIcons.map(({src: source, ...rest}) => {
+      icons: siteMeta.manifestIcons.map(({ src: source, ...rest }) => {
         return {
           src: path.join('public/icons', source),
           ...rest,
@@ -169,7 +169,7 @@ if (isProduction) {
       includeDirectory: false,
     }),
     // Copy icons and other assets
-    new CopyPlugin(siteMeta.copyMeta.map(({from = '', to, name}) => {
+    new CopyPlugin(siteMeta.copyMeta.map(({ from = '', to, name }) => {
       return {
         from: path.join(__dirname, '../public', from, name),
         to,
