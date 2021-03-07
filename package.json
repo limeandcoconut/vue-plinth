@@ -8,7 +8,7 @@
     "pack:prod": "NODE_ENV=production webpack --config config/webpack.config.js --progress",
     "serve:prod": "NODE_ENV=production node server/serve.js",
     "clean": "rm dist/*",
-    "lint:fix": "eslint . --max-warnings 0 --format codeframe --ext .js,.vue, --fix"
+    "lint:fix": "eslint . --max-warnings 0 --format codeframe --ext .js,.vue --fix"
   },
   "keywords": [],
   "author": "Jacob Smith <js@jacobsmith.tech>",

@@ -52,6 +52,7 @@ const config = {
             loader: 'css-loader',
             options: {
               sourceMap: !isProduction,
+              url: url => !/\/fonts\/.*\.woff2/.test(url),
             },
           },
           {
@@ -62,7 +63,15 @@ const config = {
               },
             },
           },
-          'less-loader',
+          {
+            loader: 'less-loader',
+            options: {
+              lessOptions: {
+                // Look into this if you have problems with nested relative urls
+                // relativeUrls: false,
+              },
+            },
+          },
         ],
       },
     ],
