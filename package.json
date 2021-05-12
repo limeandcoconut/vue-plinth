@@ -47,7 +47,7 @@
     "ienoopen": "^1.1.1",
     "less": "^4.1.1",
     "less-loader": "^7.3.0",
-    "postcss": "^8.2.7",
+    "postcss": "^8.2.10",
     "postcss-loader": "^4.2.0",
     "robotstxt-webpack-plugin": "^7.0.0",
     "sitemap-webpack-plugin": "^1.1.0",
