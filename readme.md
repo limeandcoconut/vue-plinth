@@ -45,6 +45,8 @@ Getting local copies of Google Fonts
 https://google-webfonts-helper.herokuapp.com
 
 ## Todos
+- [ ] - [ ] use jsfuck for email addres to prevent scraping and 4 lols
+  - [ ] Alternatively use rtl characters to type email backwards but render ltr
 - [ ] Add blame link for IE section
 
 ### Maybe Todos
